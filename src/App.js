@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import FormWrapper from "./components/FormWrapper";
+import useMultyStep from "./hooks/useMultyStep";
+import Home from "./components/Home";
+import PrivateInfo from "./components/form components/PrivateInfo";
+import ExperianceWrapper from "./components/form components/ExperianceWrapper";
 
 function App() {
+  const { currentStep, step } = useMultyStep([
+    <Home />,
+    <FormWrapper title="პირადი ინფო">
+      <PrivateInfo />
+    </FormWrapper>,
+    <FormWrapper title="გამოცდილება">
+      <ExperianceWrapper />
+    </FormWrapper>,
+    <FormWrapper title="განათლება">
+      <PrivateInfo />
+    </FormWrapper>,
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className={`${
+        currentStep === 0 && "bacgkroundImage"
+      } bg-no-repeat bg-center bg-cover   `}
+    >
+      <div className="m-auto">{step}</div>
     </div>
   );
 }

@@ -1,13 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .allinputs {
+    @apply w-full px-[16px] py-[13px] my-[6px] outline-none border-[#BCBCBC] border-solid border-[1px] rounded-[4px];
+  }
+
+  .inputDesc {
+    @apply text-[14px] font-helveticLight text-[#2E2E2E];
+  }
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #f9f9f9;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+  @font-face {
+    font-family: "helvetic";
+    src: url("/public/fonts/helvatic/HelveticaNeue-01.ttf"),
+      url("/public/fonts/helvatic/HelveticaNeue-Bold-02.ttf"),
+      url("/public/fonts/helvatic/HelveticaNeue-Italic-03.ttf"),
+      url("/public/fonts/helvatic/HelveticaNeue-MediumItalic-12.ttf"),
+      url("/public/fonts/helvatic/HelveticaNeue-UltraLight-06.ttf");
+  }
+
+  @font-face {
+    font-family: "helveticLight";
+    font-weight: 300;
+    src: url("/public/fonts/helvatic/HelveticaNeue-Light-08.ttf");
+  }
+
+  @font-face {
+    font-family: "second";
+    src: url("/public/fonts/other/alkdots-webfont.woff") format("woff");
+  }
+}
+
+.bacgkroundImage {
+  background-image: url("/public/img/background.png");
 }
