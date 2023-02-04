@@ -3,9 +3,10 @@ import React, { createContext, useState } from "react";
 export const FormContext = createContext();
 
 const FormProvider = ({ children }) => {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(0);
   const [allStep, setAllStep] = useState(0);
   const [experianceFormCount, setExperianceFormCount] = useState(1);
+  const [educationFormCount, setEducationFormCount] = useState(1);
 
   return (
     <FormContext.Provider
@@ -16,6 +17,8 @@ const FormProvider = ({ children }) => {
         setAllStep,
         experianceFormCount,
         setExperianceFormCount,
+        educationFormCount,
+        setEducationFormCount,
       }}
     >
       {children}

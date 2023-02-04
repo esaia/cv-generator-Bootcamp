@@ -3,9 +3,13 @@ import useMultyStep from "./hooks/useMultyStep";
 import Home from "./components/Home";
 import PrivateInfo from "./components/form components/PrivateInfo";
 import ExperianceWrapper from "./components/form components/ExperianceWrapper";
+import EducationWrapper from "./components/form components/EducationWrapper";
+import FinalCvPage from "./components/FinalCvPage";
+import "./index.css";
+import useFormContext from "./hooks/useFormContext";
 
 function App() {
-  const { currentStep, step } = useMultyStep([
+  const { step } = useMultyStep([
     <Home />,
     <FormWrapper title="პირადი ინფო">
       <PrivateInfo />
@@ -14,15 +18,18 @@ function App() {
       <ExperianceWrapper />
     </FormWrapper>,
     <FormWrapper title="განათლება">
-      <PrivateInfo />
+      <EducationWrapper />
     </FormWrapper>,
+    <FinalCvPage />,
   ]);
+
+  const { currentStep } = useFormContext();
 
   return (
     <div
       className={`${
-        currentStep === 0 && "bacgkroundImage"
-      } bg-no-repeat bg-center bg-cover   `}
+        currentStep === 0 && "bg-homeBackground"
+      } bg-no-repeat bg-center bg-cover font-helvetic`}
     >
       <div className="m-auto">{step}</div>
     </div>

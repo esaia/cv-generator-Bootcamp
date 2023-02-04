@@ -10,19 +10,33 @@
   .inputDesc {
     @apply text-[14px] font-helveticLight text-[#2E2E2E];
   }
+  .cvTitles {
+    @apply text-[#F93B1D] text-[18px] font-helveticBold;
+  }
 }
+
 body {
   background-color: #f9f9f9;
+}
+
+.bacgkroundImage {
+  background-image: url("/public/img/background.png");
 }
 
 @layer base {
   @font-face {
     font-family: "helvetic";
-    src: url("/public/fonts/helvatic/HelveticaNeue-01.ttf"),
-      url("/public/fonts/helvatic/HelveticaNeue-Bold-02.ttf"),
-      url("/public/fonts/helvatic/HelveticaNeue-Italic-03.ttf"),
-      url("/public/fonts/helvatic/HelveticaNeue-MediumItalic-12.ttf"),
-      url("/public/fonts/helvatic/HelveticaNeue-UltraLight-06.ttf");
+    src: url("/public/fonts/helvatic/HelveticaNeue-01.ttf");
+  }
+
+  @font-face {
+    font-family: "helveticSemibold";
+    src: url("/public/fonts/helvatic/HelveticaNeue-Medium-11.ttf");
+  }
+
+  @font-face {
+    font-family: "helveticBold";
+    src: url("/public/fonts/helvatic/HelveticaNeue-Bold-02.ttf");
   }
 
   @font-face {
@@ -35,8 +49,4 @@ body {
     font-family: "second";
     src: url("/public/fonts/other/alkdots-webfont.woff") format("woff");
   }
-}
-
-.bacgkroundImage {
-  background-image: url("/public/img/background.png");
 }

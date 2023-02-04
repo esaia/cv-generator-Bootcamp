@@ -9,6 +9,8 @@ const useFormContext = () => {
     setAllStep,
     experianceFormCount,
     setExperianceFormCount,
+    educationFormCount,
+    setEducationFormCount,
   } = useContext(FormContext);
 
   return {
@@ -18,6 +20,8 @@ const useFormContext = () => {
     setAllStep,
     experianceFormCount,
     setExperianceFormCount,
+    educationFormCount,
+    setEducationFormCount,
   };
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import useFormContext from "../hooks/useFormContext";
+import Cv from "./Cv";
 
 const FormWrapper = ({ children, title }) => {
   const { currentStep, setCurrentStep, allStep } = useFormContext();
@@ -13,7 +14,7 @@ const FormWrapper = ({ children, title }) => {
   };
 
   return (
-    <div className="flex  ">
+    <div className="flex">
       <div className="w-[60%] min-h-[100vh] flex justify-center ">
         <div className="w-full h-full flex flex-col justify-between items-cente  max-w-[820px] px-[20px]  ">
           <div>
@@ -27,7 +28,7 @@ const FormWrapper = ({ children, title }) => {
 
             {/* icon to back absolute */}
             <div
-              className="p-2 bg-white w-[40px] h-[40px] flex justify-center items-center rounded-full absolute top-[45px] left-[48px]"
+              className="p-2 bg-white w-[40px] h-[40px] flex justify-center items-center rounded-full absolute top-[45px] left-[48px] cursor-pointer"
               onClick={() => setCurrentStep(0)}
             >
               <img src="./img/leftArr.svg" alt="" />
@@ -43,7 +44,7 @@ const FormWrapper = ({ children, title }) => {
               className="px-[35px] py-[14px] bg-[#6B40E3] text-white rounded-[4px]"
               onClick={next}
             >
-              {currentStep === allStep - 1 ? "დასრულება" : "შემდეგი"}
+              {currentStep === allStep - 2 ? "დასრულება" : "შემდეგი"}
             </button>
 
             {currentStep > 1 && (
@@ -57,7 +58,10 @@ const FormWrapper = ({ children, title }) => {
           </div>
         </div>
       </div>
-      <div className="w-[40%] bg-white h-full">es cv generatori</div>
+
+      <div className="relative w-[40%] bg-white min-h-[100vh] h-full py-5 px-20">
+        <Cv />
+      </div>
     </div>
   );
 };

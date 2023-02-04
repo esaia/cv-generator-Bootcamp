@@ -3,7 +3,7 @@ import React from "react";
 const Experience = () => {
   return (
     <div>
-      <form className="flex flex-col gap-[40px] mb-10 pb-10 border-b-2 border-solid border-[#C1C1C1]">
+      <form className="flex flex-col gap-[40px] mb-10 pb-10 border-b-[1px] border-solid border-[#C1C1C1]">
         {/* თანამდებობა */}
         <div>
           <label htmlFor="">თანამდებობა</label>
