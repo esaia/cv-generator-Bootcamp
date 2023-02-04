@@ -11,17 +11,28 @@ const useFormContext = () => {
     setExperianceFormCount,
     educationFormCount,
     setEducationFormCount,
+    inputsData,
+    setInputsData,
+    onChangeInput,
   } = useContext(FormContext);
 
   return {
     currentStep,
     setCurrentStep,
+
     allStep,
     setAllStep,
+
     experianceFormCount,
     setExperianceFormCount,
+
     educationFormCount,
     setEducationFormCount,
+
+    inputsData,
+    setInputsData,
+
+    onChangeInput,
   };
 };
 

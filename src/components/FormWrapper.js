@@ -1,6 +1,7 @@
 import React from "react";
 import useFormContext from "../hooks/useFormContext";
 import Cv from "./Cv";
+import ResetIcon from "./ResetIcon";
 
 const FormWrapper = ({ children, title }) => {
   const { currentStep, setCurrentStep, allStep } = useFormContext();
@@ -22,17 +23,12 @@ const FormWrapper = ({ children, title }) => {
             <div className="header my-[47px] pb-[8px] border-solid border-b-black border-b-[1px] flex justify-between items-center">
               <h1 className="font-bold text-[24px]">{title} </h1>
               <p>
-                {currentStep} / {allStep - 1}
+                {currentStep} / {allStep - 2}
               </p>
             </div>
 
             {/* icon to back absolute */}
-            <div
-              className="p-2 bg-white w-[40px] h-[40px] flex justify-center items-center rounded-full absolute top-[45px] left-[48px] cursor-pointer"
-              onClick={() => setCurrentStep(0)}
-            >
-              <img src="./img/leftArr.svg" alt="" />
-            </div>
+            <ResetIcon />
 
             {/* component */}
             <div className="mycomponent">{children}</div>

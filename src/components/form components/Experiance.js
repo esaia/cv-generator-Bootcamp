@@ -1,8 +1,10 @@
 import React from "react";
+import useFormContext from "../../hooks/useFormContext";
 
-const Experience = () => {
+const Experience = ({ index }) => {
+  const { inputsData, onChangeInput } = useFormContext();
   return (
-    <div>
+    <>
       <form className="flex flex-col gap-[40px] mb-10 pb-10 border-b-[1px] border-solid border-[#C1C1C1]">
         {/* თანამდებობა */}
         <div>
@@ -11,6 +13,9 @@ const Experience = () => {
             type="text"
             className="allinputs"
             placeholder="დეველოპერი, დიზაინერი, ა.შ."
+            name="position"
+            value={inputsData.experiences[index].position}
+            onChange={(e) => onChangeInput(e, index)}
           />
           <span className="inputDesc">მინიმუმ 2 სიმბოლო</span>
         </div>
@@ -19,7 +24,14 @@ const Experience = () => {
 
         <div>
           <label htmlFor="">დამსაქმებელი</label>
-          <input type="text" className="allinputs" placeholder="დამსაქმებელი" />
+          <input
+            type="text"
+            className="allinputs"
+            placeholder="დამსაქმებელი"
+            name="employer"
+            value={inputsData.experiences[index].employer}
+            onChange={(e) => onChangeInput(e, index)}
+          />
           <span className="inputDesc">მინიმუმ 2 სიმბოლო</span>
         </div>
 
@@ -27,12 +39,24 @@ const Experience = () => {
         <div className="flex justify-between">
           <div className="w-full mr-5">
             <label htmlFor="">დაწყების რიცხვი</label>
-            <input type="date" className="allinputs" />
+            <input
+              type="date"
+              className="allinputs"
+              name="start_date"
+              value={inputsData.experiences[index].start_date}
+              onChange={(e) => onChangeInput(e, index)}
+            />
           </div>
 
           <div className="w-full ml-5">
             <label htmlFor="">დამთავრების რიცხვი</label>
-            <input type="date" className="allinputs" />
+            <input
+              type="date"
+              className="allinputs"
+              name="due_date"
+              value={inputsData.experiences[index].due_date}
+              onChange={(e) => onChangeInput(e, index)}
+            />
           </div>
         </div>
 
@@ -44,10 +68,13 @@ const Experience = () => {
             type="text"
             className="allinputs h-[103px] pb-[0px]"
             placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
+            name="description"
+            value={inputsData.experiences[index].description}
+            onChange={(e) => onChangeInput(e, index)}
           />
         </div>
       </form>
-    </div>
+    </>
   );
 };
 

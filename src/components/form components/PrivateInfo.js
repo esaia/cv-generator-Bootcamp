@@ -1,6 +1,9 @@
 import React from "react";
+import useFormContext from "../../hooks/useFormContext";
 
 const PrivateInfo = () => {
+  const { inputsData, onChangeInput } = useFormContext();
+
   return (
     <div>
       <form className="flex flex-col gap-[40px]">
@@ -9,13 +12,27 @@ const PrivateInfo = () => {
         <div className="flex  ">
           <div className="mr-6">
             <label htmlFor="">სახელი</label>
-            <input type="text" className="allinputs" placeholder="ანზორ" />
+            <input
+              type="text"
+              className="allinputs"
+              placeholder="ანზორ"
+              name="name"
+              value={inputsData.name}
+              onChange={(e) => onChangeInput(e)}
+            />
             <span className="inputDesc">მინიმუმ 2 ასო, ქართული ასოები</span>
           </div>
 
           <div className="ml-6">
             <label htmlFor="">გვარი</label>
-            <input type="text" className="allinputs" placeholder="მუმლაძე" />
+            <input
+              type="text"
+              className="allinputs"
+              placeholder="მუმლაძე"
+              name="surname"
+              value={inputsData.surname}
+              onChange={(e) => onChangeInput(e)}
+            />
             <span className="inputDesc">მინიმუმ 2 ასო, ქართული ასოები</span>
           </div>
         </div>
@@ -30,7 +47,14 @@ const PrivateInfo = () => {
           >
             ატვირთვა
           </label>
-          <input type="file" id="profile" hidden />
+          <input
+            type="file"
+            id="profile"
+            name="image"
+            value={inputsData.image}
+            onChange={(e) => onChangeInput(e)}
+            hidden
+          />
         </div>
 
         {/* ჩემს შესახებ */}
@@ -41,6 +65,9 @@ const PrivateInfo = () => {
             type="text"
             className="allinputs h-[103px] pb-[0px]"
             placeholder="ზოგადი ინფო შენ შესახებ"
+            name="about_me"
+            value={inputsData.about_me}
+            onChange={(e) => onChangeInput(e)}
           />
         </div>
 
@@ -52,6 +79,9 @@ const PrivateInfo = () => {
             type="text"
             className="allinputs"
             placeholder="anzorr666@redberry.ge"
+            name="email"
+            value={inputsData.email}
+            onChange={(e) => onChangeInput(e)}
           />
           <span className="inputDesc">უნდა მთავრდებოდეს @redberry.ge-ით</span>
         </div>
@@ -64,6 +94,9 @@ const PrivateInfo = () => {
             type="text"
             className="allinputs"
             placeholder="+995 551 12 34 56"
+            name="phone_number"
+            value={inputsData.phone_number}
+            onChange={(e) => onChangeInput(e)}
           />
           <span className="inputDesc">
             უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
