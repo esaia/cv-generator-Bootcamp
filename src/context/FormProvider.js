@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import FinalCvPage from "../components/FinalCvPage";
 
 export const FormContext = createContext();
 
@@ -47,21 +46,17 @@ const FormProvider = ({ children }) => {
   const [currentStep, setCurrentStep] = useState(
     getsaveInfoObj()?.currentStep || 0
   );
-
   const [allStep, setAllStep] = useState(0);
-  const [experianceFormCount, setExperianceFormCount] = useState(
-    getsaveInfoObj()?.experianceFormCount || 1
-  );
-  const [educationFormCount, setEducationFormCount] = useState(
-    getsaveInfoObj()?.educationFormCount || 1
-  );
-
   const [inputsData, setInputsData] = useState(getFromLocalStorage());
+
+  const [image, setImage] = useState();
+
+  const [photoData, setphotoData] = useState(
+    localStorage.getItem("photoData") ? localStorage.getItem("photoData") : null
+  );
 
   const saveInfoObj = {
     currentStep,
-    experianceFormCount,
-    educationFormCount,
   };
 
   useEffect(() => {
@@ -69,12 +64,21 @@ const FormProvider = ({ children }) => {
     localStorage.setItem("saveInfoObj", JSON.stringify(saveInfoObj));
   }, [inputsData, currentStep]);
 
-  // console.log(inputsData.experiences[0].position);
-
   const onChangeInput = (e, i) => {
     switch (currentStep) {
       case 1:
-        setInputsData({ ...inputsData, [e.target.name]: e.target.value });
+        if (e.target.name === "image") {
+          setImage(e.target.files[0]);
+
+          return setInputsData({
+            ...inputsData,
+            [e.target.name]: e.target.files[0].name,
+          });
+        }
+        setInputsData({
+          ...inputsData,
+          [e.target.name]: e.target.value,
+        });
         break;
       case 2:
         inputsData.experiences[i] = {
@@ -105,12 +109,15 @@ const FormProvider = ({ children }) => {
         setCurrentStep,
         allStep,
         setAllStep,
-        experianceFormCount,
-        setExperianceFormCount,
-        educationFormCount,
-        setEducationFormCount,
+
         inputsData,
         setInputsData,
+
+        image,
+        setImage,
+
+        photoData,
+        setphotoData,
 
         onChangeInput,
       }}

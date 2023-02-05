@@ -3,16 +3,9 @@ import useFormContext from "../../hooks/useFormContext";
 import Education from "./Education";
 
 const EducationWrapper = () => {
-  const {
-    inputsData,
-    setInputsData,
-    educationFormCount,
-    setEducationFormCount,
-  } = useFormContext();
+  const { inputsData, setInputsData } = useFormContext();
 
   const addEducationForm = () => {
-    setEducationFormCount((prev) => prev + 1);
-
     setInputsData({
       ...inputsData,
 
@@ -30,7 +23,7 @@ const EducationWrapper = () => {
 
   return (
     <div>
-      {new Array(educationFormCount).fill().map((_, i) => (
+      {new Array(inputsData.educations.length).fill().map((_, i) => (
         <Education key={i} index={i} />
       ))}
 

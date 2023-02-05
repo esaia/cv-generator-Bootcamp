@@ -2,17 +2,15 @@ import React from "react";
 import useFormContext from "../hooks/useFormContext";
 
 const ResetIcon = () => {
-  const {
-    setCurrentStep,
-    setInputsData,
-    setExperianceFormCount,
-    setEducationFormCount,
-  } = useFormContext();
+  const { setCurrentStep, setInputsData, setphotoData, setImage } =
+    useFormContext();
 
   const resetForm = () => {
     setCurrentStep(0);
-    setExperianceFormCount(1);
-    setEducationFormCount(1);
+
+    setphotoData(null);
+    setImage(null);
+
     setInputsData({
       name: "",
       surname: "",

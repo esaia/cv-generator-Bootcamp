@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useFormContext from "../../hooks/useFormContext";
 
 const Education = ({ index }) => {
   const { inputsData, onChangeInput } = useFormContext();
+
+  const [degrees, setDegrees] = useState([]);
+
+  useEffect(() => {
+    const fetchDegrees = async () => {
+      const res = await fetch(
+        "https://resume.redberryinternship.ge/api/degrees"
+      );
+      const data = await res.json();
+      setDegrees(data);
+    };
+
+    fetchDegrees();
+  }, []);
 
   return (
     <div>
@@ -24,12 +38,21 @@ const Education = ({ index }) => {
         {/* ხარისხი & თარიღი */}
         <div className="flex justify-between">
           <div className="w-full mr-5 flex flex-col">
-            <label htmlFor="cars">ხარისხი</label>
-            <select className="allinputs" name="degree" id="cars">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
+            <label htmlFor="degrees">ხარისხი</label>
+            <select
+              className="allinputs"
+              name="degree"
+              id="degrees"
+              value={inputsData.educations[index].degree}
+              onChange={(e) => onChangeInput(e, index)}
+            >
+              {degrees.map((degree) => {
+                return (
+                  <option key={degree.id} value={`${degree.title}`}>
+                    {degree.title}
+                  </option>
+                );
+              })}
             </select>
           </div>
 

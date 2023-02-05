@@ -3,15 +3,9 @@ import useFormContext from "../../hooks/useFormContext";
 import Experience from "./Experiance";
 
 const ExperianceWrapper = () => {
-  const {
-    experianceFormCount,
-    setExperianceFormCount,
-    inputsData,
-    setInputsData,
-  } = useFormContext();
+  const { inputsData, setInputsData } = useFormContext();
 
   const addExperianceForm = () => {
-    setExperianceFormCount((prev) => prev + 1);
     setInputsData({
       ...inputsData,
       experiences: [
@@ -29,7 +23,7 @@ const ExperianceWrapper = () => {
 
   return (
     <div>
-      {new Array(experianceFormCount).fill().map((_, i) => (
+      {new Array(inputsData.experiences.length).fill().map((_, i) => (
         <Experience key={i} index={i} />
       ))}
 

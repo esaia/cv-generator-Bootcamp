@@ -39,7 +39,7 @@ const PrivateInfo = () => {
 
         {/* ფოტოს ატვირთვა */}
 
-        <div className=" flex gap-3 items-center">
+        <div className="flex gap-3 items-center">
           <p>პირადი ფოტოს ატვირთვა</p>
           <label
             htmlFor="profile"
@@ -51,7 +51,7 @@ const PrivateInfo = () => {
             type="file"
             id="profile"
             name="image"
-            value={inputsData.image}
+            // value={inputsData.image}
             onChange={(e) => onChangeInput(e)}
             hidden
           />

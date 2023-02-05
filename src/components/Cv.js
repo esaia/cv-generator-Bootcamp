@@ -1,87 +1,152 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useFormContext from "../hooks/useFormContext";
 
 const Cv = () => {
+  const { inputsData, setInputsData, image, photoData, setphotoData } =
+    useFormContext();
+
+  useEffect(() => {
+    if (image?.size < 5000000) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(image);
+      fileReader.onload = (event) => {
+        setphotoData(event.target.result);
+      };
+    } else {
+      setphotoData(null);
+      setInputsData({ ...inputsData, image: "" });
+      localStorage.removeItem("photoData");
+    }
+    if (photoData) {
+      localStorage.setItem("photoData", photoData);
+    }
+  }, [photoData, image]);
+
+  useEffect(() => {
+    const storedPhotoData = localStorage.getItem("photoData");
+    if (storedPhotoData) {
+      setphotoData(storedPhotoData);
+    }
+  }, []);
+
   return (
-    <>
+    <div className="pb-20">
       <div className="absolute bottom-[44px] left-[78px]">
         <img className="w-[42px]" src="./img/cvicon.svg" alt="cvIcon" />
       </div>
+      <p></p>
 
       {/* ჩემს შესახებ */}
-      <div className="flex  py-[20px]">
-        <div className="flex flex-col gap-5">
+      <div className="flex items-start py-[20px] ">
+        <div className=" flex flex-[60%] flex-col gap-5 ">
           <h2 className="text-[#F93B1D] text-[34px] font-bold">
-            ანზორ მუმლაძე
+            {inputsData.name + " " + inputsData.surname}
           </h2>
 
           <div>
-            <div className="flex gap-2 items-center pb-[3px]">
-              <img src="./img/vectorEmail.svg" alt="icon" />
-              <p>anzorr666@redberry.ge</p>
-            </div>
+            {inputsData.email && (
+              <div className="flex gap-2 items-center pb-[3px]">
+                <img src="./img/vectorEmail.svg" alt="icon" />
+                <p>{inputsData.email}</p>
+              </div>
+            )}
 
-            <div className="flex gap-2 items-center">
-              <img src="./img/vectorPhone.svg" alt="icon" />
-              <p>anzorr666@redberry.ge</p>
-            </div>
+            {inputsData.phone_number && (
+              <div className="flex gap-2 items-center">
+                <img src="./img/vectorPhone.svg" alt="icon" />
+                <p>{inputsData.phone_number}</p>
+              </div>
+            )}
           </div>
 
-          <h3 className="cvTitles">ჩემს შესახებ</h3>
-          <p>
-            ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები
-            გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.
-          </p>
+          {inputsData.about_me && (
+            <>
+              <h3 className="cvTitles">ჩემს შესახებ</h3>
+              <p>{inputsData.about_me}</p>
+            </>
+          )}
         </div>
 
-        <div className="w-full">
-          <img
-            src="./img/profile.png"
-            alt="profile"
-            className="w-[246px] rounded-full object-cover"
-          />
+        {/* Photo */}
+        <div className=" w-[40%]  ">
+          {photoData && (
+            <img
+              src={photoData}
+              alt="profile"
+              className="w-full h-full aspect-square rounded-full object-cover "
+            />
+          )}
         </div>
       </div>
       {/* გამოცდილება*/}
 
-      <div className="flex flex-col gap-3 py-[20px] border-t-[1px] border-solid border-[#C8C8C8]">
-        <h3 className="cvTitles">გამოცდილება</h3>
+      {inputsData.experiences.map((experience) => {
+        return (
+          <div key={experience.position}>
+            {(experience.position ||
+              experience.employer ||
+              experience.description ||
+              experience.start_date ||
+              experience.due_date) && (
+              <div className="flex flex-col gap-3 py-[20px] border-t-[1px] border-solid border-[#C8C8C8]">
+                <h3 className="cvTitles">გამოცდილება</h3>
 
-        <div>
-          <h4 className="font-helveticSemibold">
-            React Native Developer, Microsoft
-          </h4>
-          <p className="italic text-[#909090] font-thin">
-            2020-09-23 - 2020-09-23
-          </p>
-        </div>
+                <div>
+                  {(experience.position || experience.employer) && (
+                    <h4 className="font-helveticSemibold">
+                      {experience.position}, {experience.employer}
+                    </h4>
+                  )}
 
-        <p className="font-helvetic">
-          Experienced Javascript Native Developer with 5 years in the industry.
-          proficient withreact. Used problem-solving aptitude to encahge
-          application performance by 14%.created data visualisation tools and
-          integrated designs.
-        </p>
-      </div>
+                  {(experience.start_date || experience.due_date) && (
+                    <p className="italic text-[#909090] font-thin">
+                      {experience.start_date} - {experience.due_date}
+                    </p>
+                  )}
+                </div>
+
+                {experience.description && (
+                  <p className="font-helvetic">{experience.description}</p>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
       {/* განათლება*/}
 
-      <div className="flex flex-col gap-3 py-[20px] border-t-[1px] border-solid border-[#C8C8C8]">
-        <h3 className="cvTitles">ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</h3>
+      {inputsData.educations.map((edu) => {
+        return (
+          <div key={edu.institute}>
+            {(edu.institute ||
+              edu.degree ||
+              edu.due_date ||
+              edu.description) && (
+              <div className="flex flex-col gap-3 py-[20px] border-t-[1px] border-solid border-[#C8C8C8]">
+                <h3 className="cvTitles">ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</h3>
 
-        <div>
-          <h4 className="font-helveticSemibold">
-            წმ. ანდრიას საპატრიარქოს სასწავლებელი, სტუდენტი
-          </h4>
-          <p className="italic text-[#909090] font-thin">2020-09-09</p>
-        </div>
+                <div>
+                  {(edu.institute || edu.degree) && (
+                    <h4 className="font-helveticSemibold">
+                      {edu.institute}, {edu.degree}
+                    </h4>
+                  )}
 
-        <p>
-          ვსწავლობდი გულმოდგინეთ. მყავდა ფრიადები. რაც შემეძლო — ვქენი.
-          კომპიუტერები მიყვარდა. ვიჯექი ჩემთვის, ვაკაკუნებდი ამ კლავიშებზე.
-          მეუნებოდნენ — დაჯექი, წაიკითხე რამე, რას აკაკუნებ, დრო მოვა და
-          ჩაგიკაკუნებსო. აჰა, მოვიდა დრო და ვერა ვარ დეველოპერი?
-        </p>
-      </div>
-    </>
+                  {edu.due_date && (
+                    <p className="italic text-[#909090] font-thin">
+                      {edu.due_date}
+                    </p>
+                  )}
+                </div>
+
+                {edu.description && <p>{edu.description}</p>}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
 };
 
