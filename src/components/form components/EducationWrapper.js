@@ -3,7 +3,8 @@ import useFormContext from "../../hooks/useFormContext";
 import Education from "./Education";
 
 const EducationWrapper = () => {
-  const { inputsData, setInputsData } = useFormContext();
+  const { inputsData, setInputsData, validations, setValidations } =
+    useFormContext();
 
   const addEducationForm = () => {
     setInputsData({
@@ -16,6 +17,19 @@ const EducationWrapper = () => {
           degree: "",
           due_date: "",
           description: "",
+        },
+      ],
+    });
+
+    setValidations({
+      ...validations,
+      educations: [
+        ...validations.educations,
+        {
+          institute: false,
+          degree: false,
+          due_date: false,
+          description: false,
         },
       ],
     });

@@ -12,6 +12,9 @@ const useFormContext = () => {
     inputsData,
     setInputsData,
 
+    validations,
+    setValidations,
+
     image,
     setImage,
 
@@ -30,6 +33,9 @@ const useFormContext = () => {
 
     inputsData,
     setInputsData,
+
+    validations,
+    setValidations,
 
     image,
     setImage,

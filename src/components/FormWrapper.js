@@ -4,10 +4,86 @@ import Cv from "./Cv";
 import ResetIcon from "./ResetIcon";
 
 const FormWrapper = ({ children, title }) => {
-  const { currentStep, setCurrentStep, allStep } = useFormContext();
+  const { currentStep, setCurrentStep, allStep, validations, inputsData } =
+    useFormContext();
+
+  const { name, surname, image, email, phone_number } = validations;
 
   const next = () => {
-    setCurrentStep((prev) => prev + 1);
+    const hasAllTrueValues = (obj) => {
+      for (const prop in obj) {
+        if (!obj[prop]) return false;
+      }
+      return true;
+    };
+
+    const hasAllFalseValues = (obj) => {
+      for (const prop in obj) {
+        if (obj[prop]) return false;
+      }
+      return true;
+    };
+
+    const hasArrayAllTrueValues = (arr) => arr.every((value) => value === true);
+
+    switch (currentStep) {
+      case 1:
+        if (name && surname && image && email && phone_number) {
+          setCurrentStep((prev) => prev + 1);
+        } else {
+          setCurrentStep((prev) => prev);
+        }
+        break;
+
+      case 2:
+        let validationCheckerSecondPage = [];
+
+        for (let i = 0; i < validations.experiences.length; i++) {
+          if (hasAllTrueValues(validations.experiences[i])) {
+            validationCheckerSecondPage.push(true);
+          } else {
+            if (hasAllFalseValues(inputsData.experiences[i]) && i !== 0) {
+              validationCheckerSecondPage.push(true);
+            } else {
+              validationCheckerSecondPage.push(false);
+            }
+          }
+        }
+
+        if (hasArrayAllTrueValues(validationCheckerSecondPage)) {
+          setCurrentStep((prev) => prev + 1);
+        } else {
+          setCurrentStep((prev) => prev);
+        }
+        break;
+
+      case 3:
+        let validationCheckerthirdPage = [];
+
+        for (let i = 0; i < validations.educations.length; i++) {
+          if (hasAllTrueValues(validations.educations[i])) {
+            validationCheckerthirdPage.push(true);
+          } else {
+            if (hasAllFalseValues(inputsData.educations[i]) && i !== 0) {
+              validationCheckerthirdPage.push(true);
+            } else {
+              validationCheckerthirdPage.push(false);
+            }
+          }
+        }
+
+        if (hasArrayAllTrueValues(validationCheckerthirdPage)) {
+          console.log("yes");
+          // setCurrentStep((prev) => prev + 1);
+        } else {
+          console.log("no");
+          // setCurrentStep((prev) => prev);
+        }
+        break;
+
+      default:
+        break;
+    }
   };
 
   const back = () => {

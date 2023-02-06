@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useFormContext from "../../hooks/useFormContext";
 
 const Education = ({ index }) => {
-  const { inputsData, onChangeInput } = useFormContext();
+  const { inputsData, onChangeInput, validations } = useFormContext();
 
   const [degrees, setDegrees] = useState([]);
 
@@ -24,14 +24,31 @@ const Education = ({ index }) => {
         {/* სასწავლებელი */}
         <div>
           <label htmlFor="">სასწავლებელი</label>
-          <input
-            type="text"
-            className="allinputs"
-            placeholder="სასწავლებელი"
-            name="institute"
-            value={inputsData.educations[index].institute}
-            onChange={(e) => onChangeInput(e, index)}
-          />
+
+          <div className="inputsDiv">
+            <input
+              type="text"
+              className="allinputs"
+              placeholder="სასწავლებელი"
+              name="institute"
+              value={inputsData.educations[index].institute}
+              onChange={(e) => onChangeInput(e, index)}
+            />
+            <img
+              src={
+                validations.educations[index]?.institute
+                  ? "./img/correctIcon.svg"
+                  : "./img/errorIcon.svg"
+              }
+              alt="successIcon"
+              className={
+                validations.educations[index]?.institute
+                  ? "correctIcon"
+                  : "errorIcon"
+              }
+            />
+          </div>
+
           <span className="inputDesc">მინიმუმ 2 სიმბოლო</span>
         </div>
 

@@ -4,14 +4,25 @@
 
 @layer components {
   .allinputs {
-    @apply w-full px-[16px] py-[13px] my-[6px] outline-none border-[#BCBCBC] border-solid border-[1px] rounded-[4px];
+    @apply w-full my-[6px] border-none ring-1 ring-[#BCBCBC] focus:ring-2 focus:ring-[#BCBCBC];
   }
 
+  .inputsDiv {
+    @apply w-full border-solid border-[1px] rounded-[4px] relative;
+  }
   .inputDesc {
     @apply text-[14px] font-helveticLight text-[#2E2E2E];
   }
   .cvTitles {
     @apply text-[#F93B1D] text-[18px] font-helveticBold;
+  }
+
+  .correctIcon {
+    @apply absolute right-2 top-[50%] translate-y-[-50%] w-[20px];
+  }
+
+  .errorIcon {
+    @apply absolute right-[-30px] top-[50%] translate-y-[-50%] w-[20px];
   }
 }
 

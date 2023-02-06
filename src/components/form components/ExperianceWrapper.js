@@ -3,7 +3,8 @@ import useFormContext from "../../hooks/useFormContext";
 import Experience from "./Experiance";
 
 const ExperianceWrapper = () => {
-  const { inputsData, setInputsData } = useFormContext();
+  const { inputsData, setInputsData, validations, setValidations } =
+    useFormContext();
 
   const addExperianceForm = () => {
     setInputsData({
@@ -16,6 +17,20 @@ const ExperianceWrapper = () => {
           start_date: "",
           due_date: "",
           description: "",
+        },
+      ],
+    });
+
+    setValidations({
+      ...validations,
+      experiences: [
+        ...validations.experiences,
+        {
+          position: false,
+          employer: false,
+          start_date: false,
+          due_date: false,
+          description: false,
         },
       ],
     });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useFormContext from "../hooks/useFormContext";
 
 const Cv = () => {
@@ -68,12 +68,12 @@ const Cv = () => {
         </div>
 
         {/* Photo */}
-        <div className=" w-[40%]  ">
+        <div className=" w-[40%] min-w-[100px]  ">
           {photoData && (
             <img
               src={photoData}
               alt="profile"
-              className="w-full h-full aspect-square rounded-full object-cover "
+              className="aspect-square rounded-full object-cover "
             />
           )}
         </div>

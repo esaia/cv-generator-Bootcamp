@@ -2,21 +2,38 @@ import React from "react";
 import useFormContext from "../../hooks/useFormContext";
 
 const Experience = ({ index }) => {
-  const { inputsData, onChangeInput } = useFormContext();
+  const { inputsData, onChangeInput, validations } = useFormContext();
   return (
     <>
       <form className="flex flex-col gap-[40px] mb-10 pb-10 border-b-[1px] border-solid border-[#C1C1C1]">
         {/* თანამდებობა */}
         <div>
           <label htmlFor="">თანამდებობა</label>
-          <input
-            type="text"
-            className="allinputs"
-            placeholder="დეველოპერი, დიზაინერი, ა.შ."
-            name="position"
-            value={inputsData.experiences[index].position}
-            onChange={(e) => onChangeInput(e, index)}
-          />
+
+          <div className="inputsDiv">
+            <input
+              type="text"
+              className="allinputs"
+              placeholder="დეველოპერი, დიზაინერი, ა.შ."
+              name="position"
+              value={inputsData.experiences[index]?.position}
+              onChange={(e) => onChangeInput(e, index)}
+            />
+            <img
+              src={
+                validations.experiences[index]?.position
+                  ? "./img/correctIcon.svg"
+                  : "./img/errorIcon.svg"
+              }
+              alt="successIcon"
+              className={
+                validations.experiences[index]?.position
+                  ? "correctIcon"
+                  : "errorIcon"
+              }
+            />
+          </div>
+
           <span className="inputDesc">მინიმუმ 2 სიმბოლო</span>
         </div>
 
@@ -24,14 +41,31 @@ const Experience = ({ index }) => {
 
         <div>
           <label htmlFor="">დამსაქმებელი</label>
-          <input
-            type="text"
-            className="allinputs"
-            placeholder="დამსაქმებელი"
-            name="employer"
-            value={inputsData.experiences[index].employer}
-            onChange={(e) => onChangeInput(e, index)}
-          />
+
+          <div className="inputsDiv">
+            <input
+              type="text"
+              className="allinputs"
+              placeholder="დამსაქმებელი"
+              name="employer"
+              value={inputsData.experiences[index]?.employer}
+              onChange={(e) => onChangeInput(e, index)}
+            />
+            <img
+              src={
+                validations.experiences[index]?.employer
+                  ? "./img/correctIcon.svg"
+                  : "./img/errorIcon.svg"
+              }
+              alt="successIcon"
+              className={
+                validations.experiences[index]?.employer
+                  ? "correctIcon"
+                  : "errorIcon"
+              }
+            />
+          </div>
+
           <span className="inputDesc">მინიმუმ 2 სიმბოლო</span>
         </div>
 
