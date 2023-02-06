@@ -4,15 +4,15 @@
 
 @layer components {
   .allinputs {
-    @apply w-full my-[6px] rounded-[4px]  border-[1px] border-solid border-[#BCBCBC]  focus:border-[1px]  focus:border-[#BCBCBC]   focus:border-solid   focus:ring-0;
+    @apply w-full my-[6px] rounded-[4px]  border-[2px] border-solid border-[#BCBCBC]  focus:border-[2px]  focus:border-[#BCBCBC]   focus:border-solid   focus:ring-0;
   }
 
   .correctInput {
-    @apply w-full my-[6px] rounded-[4px]  border-[1px] border-solid border-[#98E37E] focus:border-[1px]  focus:border-[#98E37E] focus:border-solid   focus:ring-0;
+    @apply w-full my-[6px] rounded-[4px]  border-[2px] border-solid border-[#98E37E] focus:border-[2px]  focus:border-[#98E37E] focus:border-solid   focus:ring-0;
   }
 
   .incorrectInput {
-    @apply w-full my-[6px] rounded-[4px]  border-[1px] border-solid border-[#EF5050]   focus:border-[1px]  focus:border-[#EF5050]   focus:border-solid   focus:ring-0;
+    @apply w-full my-[6px] rounded-[4px]  border-[2px] border-solid border-[#EF5050] focus:border-[2px]  focus:border-[#EF5050] focus:border-solid   focus:ring-0 animate-pulse duration-300 animate-once;
   }
 
   .inputsDiv {
@@ -36,6 +36,11 @@
 
 body {
   background-color: #f9f9f9;
+}
+
+.animate-once {
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .bacgkroundImage {

@@ -100,7 +100,18 @@ const PrivateInfo = () => {
         </div>
         {/* ფოტოს ატვირთვა */}
         <div className="flex gap-3 items-center">
-          <p>პირადი ფოტოს ატვირთვა</p>
+          {/* "text-[#EF5050]" */}
+          <p
+            className={`${
+              validations.image
+                ? ""
+                : firstButtonClicked
+                ? "text-[#EF5050] "
+                : ""
+            }`}
+          >
+            პირადი ფოტოს ატვირთვა
+          </p>
           <label
             htmlFor="profile"
             className="bg-[#0E80BF] text-white px-[19px] py-[4px] cursor-pointer rounded-[4px]"

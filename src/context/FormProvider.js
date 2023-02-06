@@ -99,11 +99,8 @@ const FormProvider = ({ children }) => {
     switch (currentStep) {
       case 1:
         if (e.target.name === "image") {
-          if (photoData) {
-            setValidations({ ...validations, [e.target.name]: true });
-          } else {
-            setValidations({ ...validations, [e.target.name]: false });
-          }
+          setValidations({ ...validations, [e.target.name]: true });
+
           return setInputsData({
             ...inputsData,
             [e.target.name]: e.target.files[0],
