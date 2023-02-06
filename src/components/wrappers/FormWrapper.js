@@ -80,6 +80,8 @@ const FormWrapper = ({ children, title }) => {
 
         if (hasArrayAllTrueValues(validationCheckerthirdPage)) {
           console.log("yes");
+
+          console.log(inputsData);
           // setCurrentStep((prev) => prev + 1);
         } else {
           console.log("no");

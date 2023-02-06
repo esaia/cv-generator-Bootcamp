@@ -129,7 +129,7 @@ const Education = ({ index }) => {
               </p>
               <img src="/img/arrowIcon.svg" alt="arrowIcon" />
               <div
-                className={`absolute top-[45px] left-0 w-full rounded-[4px] bg-white py-2  shadow-lg cursor-pointer ${
+                className={`absolute top-[45px] left-0 w-full rounded-[4px] bg-white py-2  shadow-lg cursor-pointer z-20 ${
                   showSelection ? "block" : "hidden"
                 } `}
               >

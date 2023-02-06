@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 
 export const FormContext = createContext();
 
@@ -77,7 +77,6 @@ const FormProvider = ({ children }) => {
   const [validations, setValidations] = useState(
     getsaveInfoObj()?.validations || validations_init
   );
-  const [image, setImage] = useState();
   const [photoData, setphotoData] = useState(
     localStorage.getItem("photoData") ? localStorage.getItem("photoData") : null
   );
@@ -101,13 +100,12 @@ const FormProvider = ({ children }) => {
           } else {
             setValidations({ ...validations, [e.target.name]: false });
           }
-
-          setImage(e.target.files[0]);
           return setInputsData({
             ...inputsData,
-            [e.target.name]: e.target.files[0].name,
+            [e.target.name]: e.target.files[0],
           });
         }
+
         setInputsData({
           ...inputsData,
           [e.target.name]: e.target.value,
@@ -286,9 +284,6 @@ const FormProvider = ({ children }) => {
 
         validations,
         setValidations,
-
-        image,
-        setImage,
 
         photoData,
         setphotoData,

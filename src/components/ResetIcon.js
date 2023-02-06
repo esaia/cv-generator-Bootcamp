@@ -14,8 +14,8 @@ const ResetIcon = () => {
     setCurrentStep(0);
 
     setphotoData(null);
-    setphotoData(null);
     setImage(null);
+    localStorage.removeItem("photoData");
 
     setInputsData({
       name: "",

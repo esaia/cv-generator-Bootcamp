@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Children, useEffect, useRef, useState } from "react";
 import useFormContext from "../hooks/useFormContext";
 
 const Cv = () => {
@@ -6,21 +6,19 @@ const Cv = () => {
     useFormContext();
 
   useEffect(() => {
-    if (image?.size < 5000000) {
+    if (inputsData.image?.size < 5000000) {
       const fileReader = new FileReader();
-      fileReader.readAsDataURL(image);
+      fileReader.readAsDataURL(inputsData.image);
       fileReader.onload = (event) => {
         setphotoData(event.target.result);
       };
     } else {
       setphotoData(null);
-      setInputsData({ ...inputsData, image: "" });
-      localStorage.removeItem("photoData");
     }
     if (photoData) {
       localStorage.setItem("photoData", photoData);
     }
-  }, [photoData, image]);
+  }, [photoData, inputsData.image]);
 
   useEffect(() => {
     const storedPhotoData = localStorage.getItem("photoData");
@@ -28,6 +26,24 @@ const Cv = () => {
       setphotoData(storedPhotoData);
     }
   }, []);
+
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (photoData) {
+      const base64ToFile = new File(
+        [
+          Uint8Array.from(atob(photoData.split(",")[1]), (c) =>
+            c.charCodeAt(0)
+          ),
+        ],
+        "preview.jpeg",
+        { type: photoData.split(",")[0].split(":")[1].split(";")[0] }
+      );
+
+      setInputsData({ ...inputsData, image: base64ToFile });
+    }
+  }, [photoData]);
 
   return (
     <div className="pb-20">
@@ -66,12 +82,18 @@ const Cv = () => {
             </>
           )}
         </div>
-
         {/* Photo */}
+
         <div className=" w-[40%] min-w-[100px]  ">
           {photoData && (
             <img
-              src={photoData}
+              ref={imgRef}
+              src={`
+              ${
+                inputsData.image instanceof File &&
+                URL.createObjectURL(inputsData.image)
+              }
+            `}
               alt="profile"
               className="aspect-square rounded-full object-cover "
             />

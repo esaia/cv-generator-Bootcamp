@@ -15,9 +15,6 @@ const useFormContext = () => {
     validations,
     setValidations,
 
-    image,
-    setImage,
-
     photoData,
     setphotoData,
 
@@ -36,9 +33,6 @@ const useFormContext = () => {
 
     validations,
     setValidations,
-
-    image,
-    setImage,
 
     photoData,
     setphotoData,
