@@ -219,7 +219,6 @@ const FormProvider = ({ children }) => {
         }
 
         break;
-
       case 3:
         inputsData.educations[i] = {
           ...inputsData.educations[i],

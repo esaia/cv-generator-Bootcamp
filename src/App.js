@@ -1,9 +1,9 @@
-import FormWrapper from "./components/FormWrapper";
+import FormWrapper from "./components/wrappers/FormWrapper";
 import useMultyStep from "./hooks/useMultyStep";
 import Home from "./components/Home";
 import PrivateInfo from "./components/form components/PrivateInfo";
-import ExperianceWrapper from "./components/form components/ExperianceWrapper";
-import EducationWrapper from "./components/form components/EducationWrapper";
+import ExperianceWrapper from "./components/wrappers/ExperianceWrapper";
+import EducationWrapper from "./components/wrappers/EducationWrapper";
 import FinalCvPage from "./components/FinalCvPage";
 import "./index.css";
 import useFormContext from "./hooks/useFormContext";

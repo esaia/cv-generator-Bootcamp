@@ -4,11 +4,19 @@
 
 @layer components {
   .allinputs {
-    @apply w-full my-[6px] border-none ring-1 ring-[#BCBCBC] focus:ring-2 focus:ring-[#BCBCBC];
+    @apply w-full my-[6px] rounded-[4px]  border-[1px] border-solid border-[#BCBCBC]  focus:border-[1px]  focus:border-[#BCBCBC]   focus:border-solid   focus:ring-0;
+  }
+
+  .correctInput {
+    @apply w-full my-[6px] rounded-[4px]  border-[1px] border-solid border-[#98E37E] focus:border-[1px]  focus:border-[#98E37E] focus:border-solid   focus:ring-0;
+  }
+
+  .incorrectInput {
+    @apply w-full my-[6px] rounded-[4px]  border-[1px] border-solid border-[#EF5050]   focus:border-[1px]  focus:border-[#EF5050]   focus:border-solid   focus:ring-0;
   }
 
   .inputsDiv {
-    @apply w-full border-solid border-[1px] rounded-[4px] relative;
+    @apply w-full border-solid  rounded-[4px] relative z-10;
   }
   .inputDesc {
     @apply text-[14px] font-helveticLight text-[#2E2E2E];

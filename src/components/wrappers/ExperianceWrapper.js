@@ -1,6 +1,6 @@
 import React from "react";
 import useFormContext from "../../hooks/useFormContext";
-import Experience from "./Experiance";
+import Experience from "../../components/form components/Experiance";
 
 const ExperianceWrapper = () => {
   const { inputsData, setInputsData, validations, setValidations } =

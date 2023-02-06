@@ -23,30 +23,48 @@ const Education = ({ index }) => {
       <form className="flex flex-col gap-[40px] mb-10 pb-10 border-b-[1px] border-solid border-[#C1C1C1]">
         {/* სასწავლებელი */}
         <div>
-          <label htmlFor="">სასწავლებელი</label>
+          <label
+            className={
+              inputsData.educations[index].institute &&
+              !validations.educations[index].institute
+                ? "text-[#E52F2F]"
+                : ""
+            }
+          >
+            სასწავლებელი
+          </label>
 
           <div className="inputsDiv">
             <input
               type="text"
-              className="allinputs"
+              className={
+                inputsData.educations[index].institute
+                  ? validations.educations[index].institute
+                    ? "correctInput "
+                    : "incorrectInput"
+                  : "allinputs"
+              }
               placeholder="სასწავლებელი"
               name="institute"
               value={inputsData.educations[index].institute}
               onChange={(e) => onChangeInput(e, index)}
             />
-            <img
-              src={
-                validations.educations[index]?.institute
-                  ? "./img/correctIcon.svg"
-                  : "./img/errorIcon.svg"
-              }
-              alt="successIcon"
-              className={
-                validations.educations[index]?.institute
-                  ? "correctIcon"
-                  : "errorIcon"
-              }
-            />
+
+            {inputsData.educations[index]?.institute && (
+              <img
+                src={
+                  validations.educations[index]?.institute
+                    ? "./img/correctIcon.svg"
+                    : "./img/errorIcon.svg"
+                }
+                alt="successIcon"
+                className={
+                  validations.educations[index]?.institute
+                    ? "correctIcon"
+                    : "errorIcon"
+                }
+              />
+            )}
           </div>
 
           <span className="inputDesc">მინიმუმ 2 სიმბოლო</span>
@@ -57,7 +75,13 @@ const Education = ({ index }) => {
           <div className="w-full mr-5 flex flex-col">
             <label htmlFor="degrees">ხარისხი</label>
             <select
-              className="allinputs"
+              className={
+                inputsData.educations[index].degree
+                  ? validations.educations[index].degree
+                    ? "correctInput "
+                    : "incorrectInput"
+                  : "allinputs"
+              }
               name="degree"
               id="degrees"
               value={inputsData.educations[index].degree}
@@ -77,7 +101,13 @@ const Education = ({ index }) => {
             <label htmlFor="">დამთავრების რიცხვი</label>
             <input
               type="date"
-              className="allinputs"
+              className={
+                inputsData.educations[index].due_date
+                  ? validations.educations[index].due_date
+                    ? "correctInput "
+                    : "incorrectInput"
+                  : "allinputs"
+              }
               name="due_date"
               value={inputsData.educations[index].due_date}
               onChange={(e) => onChangeInput(e, index)}
@@ -91,7 +121,16 @@ const Education = ({ index }) => {
           <label htmlFor="">აღწერა</label>
           <textarea
             type="text"
-            className="allinputs h-[103px] pb-[0px]"
+            className={`
+            ${
+              inputsData.educations[index].description
+                ? inputsData.educations[index].description
+                  ? "correctInput "
+                  : "incorrectInput"
+                : "allinputs"
+            }
+             h-[103px] pb-[0px]
+           `}
             placeholder="განათლების აღწერა"
             name="description"
             value={inputsData.educations[index].description}

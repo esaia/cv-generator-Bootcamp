@@ -1,6 +1,6 @@
 import React from "react";
 import useFormContext from "../../hooks/useFormContext";
-import Education from "./Education";
+import Education from "../form components/Education";
 
 const EducationWrapper = () => {
   const { inputsData, setInputsData, validations, setValidations } =

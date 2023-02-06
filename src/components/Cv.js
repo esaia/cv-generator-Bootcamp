@@ -80,9 +80,9 @@ const Cv = () => {
       </div>
       {/* გამოცდილება*/}
 
-      {inputsData.experiences.map((experience) => {
+      {inputsData.experiences.map((experience, i) => {
         return (
-          <div key={experience.position}>
+          <div key={i}>
             {(experience.position ||
               experience.employer ||
               experience.description ||
@@ -116,9 +116,9 @@ const Cv = () => {
 
       {/* განათლება*/}
 
-      {inputsData.educations.map((edu) => {
+      {inputsData.educations.map((edu, i) => {
         return (
-          <div key={edu.institute}>
+          <div key={i}>
             {(edu.institute ||
               edu.degree ||
               edu.due_date ||

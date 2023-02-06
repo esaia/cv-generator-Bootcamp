@@ -10,61 +10,90 @@ const PrivateInfo = () => {
         {/* სახელი & გვარი */}
         <div className="flex justify-between ">
           <div className="mr-6 w-full">
-            <label htmlFor="">სახელი</label>
+            <label
+              className={
+                inputsData.name && !validations.name ? "text-[#E52F2F]" : ""
+              }
+            >
+              სახელი
+            </label>
 
             <div className="inputsDiv">
               <input
                 type="text"
-                className="allinputs"
+                className={
+                  inputsData.name
+                    ? validations.name
+                      ? "correctInput "
+                      : "incorrectInput"
+                    : "allinputs"
+                }
                 placeholder="ანზორ"
                 name="name"
                 value={inputsData.name}
                 onChange={(e) => onChangeInput(e)}
               />
-              <img
-                src={
-                  validations.name
-                    ? "./img/correctIcon.svg"
-                    : "./img/errorIcon.svg"
-                }
-                alt="successIcon"
-                className={validations.name ? "correctIcon" : "errorIcon"}
-              />
+
+              {inputsData.name && (
+                <img
+                  src={
+                    validations.name
+                      ? "./img/correctIcon.svg"
+                      : "./img/errorIcon.svg"
+                  }
+                  alt="successIcon"
+                  className={validations.name ? "correctIcon" : "errorIcon"}
+                />
+              )}
             </div>
 
             <span className="inputDesc">მინიმუმ 2 ასო, ქართული ასოები</span>
           </div>
 
           <div className="ml-6 w-full">
-            <label htmlFor="">გვარი</label>
+            <label
+              className={
+                inputsData.surname && !validations.surname
+                  ? "text-[#E52F2F]"
+                  : ""
+              }
+            >
+              გვარი
+            </label>
 
             <div className="inputsDiv">
               <input
                 type="text"
-                className="allinputs"
+                className={
+                  inputsData.surname
+                    ? validations.surname
+                      ? "correctInput "
+                      : "incorrectInput"
+                    : "allinputs"
+                }
                 placeholder="მუმლაძე"
                 name="surname"
                 value={inputsData.surname}
                 onChange={(e) => onChangeInput(e)}
               />
 
-              <img
-                src={
-                  validations.surname
-                    ? "./img/correctIcon.svg"
-                    : "./img/errorIcon.svg"
-                }
-                alt="successIcon"
-                className={validations.surname ? "correctIcon" : "errorIcon"}
-              />
+              {inputsData.surname && (
+                <img
+                  src={
+                    validations.surname
+                      ? "./img/correctIcon.svg"
+                      : "./img/errorIcon.svg"
+                  }
+                  alt="successIcon"
+                  className={validations.surname ? "correctIcon" : "errorIcon"}
+                />
+              )}
             </div>
 
             <span className="inputDesc">მინიმუმ 2 ასო, ქართული ასოები</span>
           </div>
         </div>
-
         {/* ფოტოს ატვირთვა */}
-
         <div className="flex gap-3 items-center">
           <p>პირადი ფოტოს ატვირთვა</p>
           <label
@@ -82,74 +111,102 @@ const PrivateInfo = () => {
             hidden
           />
         </div>
-
         {/* ჩემს შესახებ */}
-
         <div>
-          <label htmlFor="">ჩემს შესახებ (არასავალდებულო)</label>
+          <label>ჩემს შესახებ (არასავალდებულო)</label>
           <textarea
             type="text"
-            className="allinputs h-[103px] pb-[0px]"
+            className={` ${
+              inputsData.about_me ? "correctInput" : "allinputs"
+            } h-[103px] pb-[0px]`}
             placeholder="ზოგადი ინფო შენ შესახებ"
             name="about_me"
             value={inputsData.about_me}
             onChange={(e) => onChangeInput(e)}
           />
         </div>
-
         {/* ელ-ფოსტა */}
-
         <div>
-          <label htmlFor="">ელ.ფოსტა</label>
+          <label
+            className={
+              inputsData.email && !validations.email ? "text-[#E52F2F]" : ""
+            }
+          >
+            ელ.ფოსტა
+          </label>
 
           <div className="inputsDiv">
             <input
               type="text"
-              className="allinputs"
+              className={
+                inputsData.email
+                  ? validations.email
+                    ? "correctInput "
+                    : "incorrectInput"
+                  : "allinputs"
+              }
               placeholder="anzorr666@redberry.ge"
               name="email"
               value={inputsData.email}
               onChange={(e) => onChangeInput(e)}
             />
 
-            <img
-              src={
-                validations.email
-                  ? "./img/correctIcon.svg"
-                  : "./img/errorIcon.svg"
-              }
-              alt="successIcon"
-              className={validations.email ? "correctIcon" : "errorIcon"}
-            />
+            {inputsData.email && (
+              <img
+                src={
+                  validations.email
+                    ? "./img/correctIcon.svg"
+                    : "./img/errorIcon.svg"
+                }
+                alt="successIcon"
+                className={validations.email ? "correctIcon" : "errorIcon"}
+              />
+            )}
           </div>
 
           <span className="inputDesc">უნდა მთავრდებოდეს @redberry.ge-ით</span>
         </div>
-
         {/* ნომერი */}
-
         <div>
-          <label htmlFor="">მობილურის ნომერი</label>
+          <label
+            className={
+              inputsData.phone_number && !validations.phone_number
+                ? "text-[#E52F2F]"
+                : ""
+            }
+          >
+            მობილურის ნომერი
+          </label>
 
           <div className="inputsDiv">
             <input
               type="text"
-              className="allinputs"
+              className={
+                inputsData.phone_number
+                  ? validations.phone_number
+                    ? "correctInput "
+                    : "incorrectInput"
+                  : "allinputs"
+              }
               placeholder="+995 551 12 34 56"
               name="phone_number"
               value={inputsData.phone_number}
               onChange={(e) => onChangeInput(e)}
             />
 
-            <img
-              src={
-                validations.phone_number
-                  ? "./img/correctIcon.svg"
-                  : "./img/errorIcon.svg"
-              }
-              alt="successIcon"
-              className={validations.phone_number ? "correctIcon" : "errorIcon"}
-            />
+            {inputsData.phone_number && (
+              <img
+                src={
+                  validations.phone_number
+                    ? "./img/correctIcon.svg"
+                    : "./img/errorIcon.svg"
+                }
+                alt="successIcon"
+                className={
+                  validations.phone_number ? "correctIcon" : "errorIcon"
+                }
+              />
+            )}
           </div>
 
           <span className="inputDesc">

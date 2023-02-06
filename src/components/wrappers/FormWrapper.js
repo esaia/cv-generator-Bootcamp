@@ -1,13 +1,19 @@
 import React from "react";
-import useFormContext from "../hooks/useFormContext";
-import Cv from "./Cv";
-import ResetIcon from "./ResetIcon";
+import useFormContext from "../../hooks/useFormContext";
+import Cv from "../Cv";
+import ResetIcon from "../ResetIcon";
 
 const FormWrapper = ({ children, title }) => {
-  const { currentStep, setCurrentStep, allStep, validations, inputsData } =
-    useFormContext();
+  const {
+    currentStep,
+    setCurrentStep,
+    allStep,
+    validations,
+    inputsData,
+    photoData,
+  } = useFormContext();
 
-  const { name, surname, image, email, phone_number } = validations;
+  const { name, surname, email, phone_number } = validations;
 
   const next = () => {
     const hasAllTrueValues = (obj) => {
@@ -28,7 +34,7 @@ const FormWrapper = ({ children, title }) => {
 
     switch (currentStep) {
       case 1:
-        if (name && surname && image && email && phone_number) {
+        if (name && surname && email && phone_number && photoData) {
           setCurrentStep((prev) => prev + 1);
         } else {
           setCurrentStep((prev) => prev);
