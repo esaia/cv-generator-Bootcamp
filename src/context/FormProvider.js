@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const FormContext = createContext();
 
@@ -68,6 +68,10 @@ const FormProvider = ({ children }) => {
       },
     ],
   };
+
+  const [firstButtonClicked, setFirstButtonClicked] = useState(false);
+  const [secondButtonClicked, setSecondButtonClicked] = useState(false);
+  const [thirdButtonClicked, setThirdButtonClicked] = useState(false);
 
   const [currentStep, setCurrentStep] = useState(
     getsaveInfoObj()?.currentStep || 0
@@ -289,6 +293,15 @@ const FormProvider = ({ children }) => {
         setphotoData,
 
         onChangeInput,
+
+        firstButtonClicked,
+        setFirstButtonClicked,
+
+        secondButtonClicked,
+        setSecondButtonClicked,
+
+        thirdButtonClicked,
+        setThirdButtonClicked,
       }}
     >
       {children}

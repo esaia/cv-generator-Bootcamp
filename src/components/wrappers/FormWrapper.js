@@ -11,6 +11,9 @@ const FormWrapper = ({ children, title }) => {
     validations,
     inputsData,
     photoData,
+    setFirstButtonClicked,
+    setSecondButtonClicked,
+    setThirdButtonClicked,
   } = useFormContext();
 
   const { name, surname, email, phone_number } = validations;
@@ -37,6 +40,7 @@ const FormWrapper = ({ children, title }) => {
         if (name && surname && email && phone_number && photoData) {
           setCurrentStep((prev) => prev + 1);
         } else {
+          setFirstButtonClicked(true);
           setCurrentStep((prev) => prev);
         }
         break;
@@ -59,6 +63,7 @@ const FormWrapper = ({ children, title }) => {
         if (hasArrayAllTrueValues(validationCheckerSecondPage)) {
           setCurrentStep((prev) => prev + 1);
         } else {
+          setSecondButtonClicked(true);
           setCurrentStep((prev) => prev);
         }
         break;
@@ -84,6 +89,7 @@ const FormWrapper = ({ children, title }) => {
           console.log(inputsData);
           // setCurrentStep((prev) => prev + 1);
         } else {
+          setThirdButtonClicked(true);
           console.log("no");
           // setCurrentStep((prev) => prev);
         }

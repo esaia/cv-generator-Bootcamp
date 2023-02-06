@@ -19,6 +19,15 @@ const useFormContext = () => {
     setphotoData,
 
     onChangeInput,
+
+    firstButtonClicked,
+    setFirstButtonClicked,
+
+    secondButtonClicked,
+    setSecondButtonClicked,
+
+    thirdButtonClicked,
+    setThirdButtonClicked,
   } = useContext(FormContext);
 
   return {
@@ -38,6 +47,15 @@ const useFormContext = () => {
     setphotoData,
 
     onChangeInput,
+
+    firstButtonClicked,
+    setFirstButtonClicked,
+
+    secondButtonClicked,
+    setSecondButtonClicked,
+
+    thirdButtonClicked,
+    setThirdButtonClicked,
   };
 };
 

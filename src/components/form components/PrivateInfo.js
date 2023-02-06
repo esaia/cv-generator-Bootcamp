@@ -2,7 +2,8 @@ import React from "react";
 import useFormContext from "../../hooks/useFormContext";
 
 const PrivateInfo = () => {
-  const { inputsData, onChangeInput, validations } = useFormContext();
+  const { inputsData, onChangeInput, validations, firstButtonClicked } =
+    useFormContext();
 
   return (
     <div>
@@ -26,6 +27,8 @@ const PrivateInfo = () => {
                     ? validations.name
                       ? "correctInput "
                       : "incorrectInput"
+                    : firstButtonClicked
+                    ? "incorrectInput"
                     : "allinputs"
                 }
                 placeholder="ანზორ"
@@ -69,6 +72,8 @@ const PrivateInfo = () => {
                     ? validations.surname
                       ? "correctInput "
                       : "incorrectInput"
+                    : firstButtonClicked
+                    ? "incorrectInput"
                     : "allinputs"
                 }
                 placeholder="მუმლაძე"
@@ -143,6 +148,8 @@ const PrivateInfo = () => {
                   ? validations.email
                     ? "correctInput "
                     : "incorrectInput"
+                  : firstButtonClicked
+                  ? "incorrectInput"
                   : "allinputs"
               }
               placeholder="anzorr666@redberry.ge"
@@ -186,6 +193,8 @@ const PrivateInfo = () => {
                   ? validations.phone_number
                     ? "correctInput "
                     : "incorrectInput"
+                  : firstButtonClicked
+                  ? "incorrectInput"
                   : "allinputs"
               }
               placeholder="+995 551 12 34 56"

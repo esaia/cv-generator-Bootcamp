@@ -2,7 +2,16 @@ import React from "react";
 import useFormContext from "../../hooks/useFormContext";
 
 const Experience = ({ index }) => {
-  const { inputsData, onChangeInput, validations } = useFormContext();
+  const { inputsData, onChangeInput, validations, secondButtonClicked } =
+    useFormContext();
+
+  const hasAllFalseValues = (obj) => {
+    for (const prop in obj) {
+      if (obj[prop]) return false;
+    }
+    return true;
+  };
+
   return (
     <>
       <form className="flex flex-col gap-[40px] mb-10 pb-10 border-b-[1px] border-solid border-[#C1C1C1]">
@@ -26,6 +35,11 @@ const Experience = ({ index }) => {
                 inputsData.experiences[index].position
                   ? validations.experiences[index].position
                     ? "correctInput "
+                    : "incorrectInput"
+                  : secondButtonClicked
+                  ? hasAllFalseValues(validations.experiences[index]) &&
+                    index !== 0
+                    ? "allinputs"
                     : "incorrectInput"
                   : "allinputs"
               }
@@ -77,6 +91,11 @@ const Experience = ({ index }) => {
                   ? validations.experiences[index].employer
                     ? "correctInput "
                     : "incorrectInput"
+                  : secondButtonClicked
+                  ? hasAllFalseValues(validations.experiences[index]) &&
+                    index !== 0
+                    ? "allinputs"
+                    : "incorrectInput"
                   : "allinputs"
               }
               placeholder="დამსაქმებელი"
@@ -116,6 +135,11 @@ const Experience = ({ index }) => {
                   ? validations.experiences[index].start_date
                     ? "correctInput "
                     : "incorrectInput"
+                  : secondButtonClicked
+                  ? hasAllFalseValues(validations.experiences[index]) &&
+                    index !== 0
+                    ? "allinputs"
+                    : "incorrectInput"
                   : "allinputs"
               }
               name="start_date"
@@ -132,6 +156,11 @@ const Experience = ({ index }) => {
                 inputsData.experiences[index].due_date
                   ? validations.experiences[index].due_date
                     ? "correctInput "
+                    : "incorrectInput"
+                  : secondButtonClicked
+                  ? hasAllFalseValues(validations.experiences[index]) &&
+                    index !== 0
+                    ? "allinputs"
                     : "incorrectInput"
                   : "allinputs"
               }
@@ -153,6 +182,11 @@ const Experience = ({ index }) => {
               inputsData.experiences[index].description
                 ? validations.experiences[index].description
                   ? "correctInput "
+                  : "incorrectInput"
+                : secondButtonClicked
+                ? hasAllFalseValues(validations.experiences[index]) &&
+                  index !== 0
+                  ? "allinputs"
                   : "incorrectInput"
                 : "allinputs"
             }

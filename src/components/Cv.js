@@ -1,10 +1,11 @@
-import React, { Children, useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import useFormContext from "../hooks/useFormContext";
 
 const Cv = () => {
-  const { inputsData, setInputsData, image, photoData, setphotoData } =
+  const { inputsData, setInputsData, photoData, setphotoData } =
     useFormContext();
 
+  // convert File To base64 and save to localstorage
   useEffect(() => {
     if (inputsData.image?.size < 5000000) {
       const fileReader = new FileReader();
@@ -20,6 +21,7 @@ const Cv = () => {
     }
   }, [photoData, inputsData.image]);
 
+  // get base64 from localstorage and set to variable
   useEffect(() => {
     const storedPhotoData = localStorage.getItem("photoData");
     if (storedPhotoData) {
@@ -27,8 +29,7 @@ const Cv = () => {
     }
   }, []);
 
-  const imgRef = useRef(null);
-
+  // convert base64 to file Type object and set inputData.image variable
   useEffect(() => {
     if (photoData) {
       const base64ToFile = new File(
@@ -82,12 +83,11 @@ const Cv = () => {
             </>
           )}
         </div>
-        {/* Photo */}
 
+        {/* Photo */}
         <div className=" w-[40%] min-w-[100px]  ">
           {photoData && (
             <img
-              ref={imgRef}
               src={`
               ${
                 inputsData.image instanceof File &&
