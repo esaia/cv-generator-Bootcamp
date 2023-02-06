@@ -151,7 +151,7 @@ const FormProvider = ({ children }) => {
             break;
 
           case "phone_number":
-            const phoneRegex = /^\+995[0-9]{9}$/;
+            const phoneRegex = /^\+995\s5\d{2}\s\d{2}\s\d{2}\s\d{2}$/;
 
             if (phoneRegex.test(e.target.value)) {
               setValidations({ ...validations, [e.target.name]: true });

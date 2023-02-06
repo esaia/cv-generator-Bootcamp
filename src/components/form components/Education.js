@@ -1,10 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useFormContext from "../../hooks/useFormContext";
 
 const Education = ({ index }) => {
-  const { inputsData, onChangeInput, validations } = useFormContext();
+  const { inputsData, setInputsData, onChangeInput, validations } =
+    useFormContext();
 
+  const [showSelection, setshowSelection] = useState(false);
+  const [selectedDegree, setselectedDegree] = useState(
+    inputsData.educations[index].degree || ""
+  );
   const [degrees, setDegrees] = useState([]);
+
+  const selectRef = useRef(null);
+
+  const handleClickOutside = (e) => {
+    if (selectRef.current && !selectRef.current.contains(e.target)) {
+      setshowSelection(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  });
+
+  useEffect(() => {
+    inputsData.educations[index] = {
+      ...inputsData.educations[index],
+      degree: selectedDegree,
+    };
+
+    if (selectedDegree && selectedDegree !== "აირჩიეთ ხარისხი") {
+      validations.educations[index] = {
+        ...validations.educations[index],
+        degree: true,
+      };
+    }
+
+    setInputsData({ ...inputsData });
+  }, [selectedDegree]);
 
   useEffect(() => {
     const fetchDegrees = async () => {
@@ -72,29 +108,46 @@ const Education = ({ index }) => {
 
         {/* ხარისხი & თარიღი */}
         <div className="flex justify-between">
-          <div className="w-full mr-5 flex flex-col">
+          <div className="w-full mr-5 flex flex-col relative">
             <label htmlFor="degrees">ხარისხი</label>
-            <select
+
+            <div
               className={
                 inputsData.educations[index].degree
-                  ? validations.educations[index].degree
-                    ? "correctInput "
-                    : "incorrectInput"
-                  : "allinputs"
+                  ? "allinputs h-full relative flex justify-between px-3 items-center bg-white  cursor-pointer correctInput"
+                  : "allinputs h-full relative flex justify-between px-3 items-center  bg-white cursor-pointer"
               }
-              name="degree"
-              id="degrees"
-              value={inputsData.educations[index].degree}
-              onChange={(e) => onChangeInput(e, index)}
+              onClick={() => setshowSelection(!showSelection)}
+              ref={selectRef}
             >
-              {degrees.map((degree) => {
-                return (
-                  <option key={degree.id} value={`${degree.title}`}>
-                    {degree.title}
-                  </option>
-                );
-              })}
-            </select>
+              <p
+                className={`
+                 ${selectedDegree === "" && "text-gray-500 "}
+               `}
+              >
+                {selectedDegree === "" ? "აირჩიეთ ხარისხი" : selectedDegree}
+              </p>
+              <img src="/img/arrowIcon.svg" alt="arrowIcon" />
+              <div
+                className={`absolute top-[45px] left-0 w-full rounded-[4px] bg-white py-2  shadow-lg cursor-pointer ${
+                  showSelection ? "block" : "hidden"
+                } `}
+              >
+                {degrees.map((degree) => {
+                  return (
+                    <p
+                      key={degree.id}
+                      className="py-[5px] px-3 hover:text-white hover:bg-gray-400"
+                      onClick={() => {
+                        setselectedDegree(degree.title);
+                      }}
+                    >
+                      {degree.title}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className="w-full ml-5">
