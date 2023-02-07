@@ -37,6 +37,7 @@ const FormProvider = ({ children }) => {
       {
         institute: "",
         degree: "",
+        degree_id: -1,
         due_date: "",
         description: "",
       },

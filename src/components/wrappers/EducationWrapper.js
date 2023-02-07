@@ -15,6 +15,7 @@ const EducationWrapper = () => {
         {
           institute: "",
           degree: "",
+          degree_id: -1,
           due_date: "",
           description: "",
         },

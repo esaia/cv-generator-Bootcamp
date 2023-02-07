@@ -4,19 +4,19 @@
 
 @layer components {
   .allinputs {
-    @apply w-full my-[6px] rounded-[4px]  border-[2px] border-solid border-[#BCBCBC]  focus:border-[2px]  focus:border-[#BCBCBC]   focus:border-solid   focus:ring-0;
+    @apply w-full my-[6px] rounded-[4px]  border-[1.5px] border-solid border-[#BCBCBC]  focus:border-[1.5px]  focus:border-[#BCBCBC]   focus:border-solid   focus:ring-0;
   }
 
   .correctInput {
-    @apply w-full my-[6px] rounded-[4px]  border-[2px] border-solid border-[#98E37E] focus:border-[2px]  focus:border-[#98E37E] focus:border-solid   focus:ring-0;
+    @apply w-full my-[6px] rounded-[4px]  border-[1.5px] border-solid border-[#98E37E] focus:border-[1.5px]  focus:border-[#98E37E] focus:border-solid   focus:ring-0;
   }
 
   .incorrectInput {
-    @apply w-full my-[6px] rounded-[4px]  border-[2px] border-solid border-[#EF5050] focus:border-[2px]  focus:border-[#EF5050] focus:border-solid   focus:ring-0 animate-pulse duration-300 animate-once;
+    @apply w-full my-[6px] rounded-[4px]  border-[1.5px] border-solid border-[#EF5050] focus:border-[1.5px]  focus:border-[#EF5050] focus:border-solid   focus:ring-0 animate-pulse duration-300 animate-once z-10;
   }
 
   .inputsDiv {
-    @apply w-full border-solid  rounded-[4px] relative z-10;
+    @apply w-full border-solid  rounded-[4px] relative;
   }
   .inputDesc {
     @apply text-[14px] font-helveticLight text-[#2E2E2E];

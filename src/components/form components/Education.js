@@ -3,13 +3,8 @@ import useFormContext from "../../hooks/useFormContext";
 import SelectDegrees from "../SelectDegrees";
 
 const Education = ({ index }) => {
-  const {
-    inputsData,
-    setInputsData,
-    onChangeInput,
-    validations,
-    thirdButtonClicked,
-  } = useFormContext();
+  const { inputsData, onChangeInput, validations, thirdButtonClicked } =
+    useFormContext();
 
   const hasAllFalseValues = (obj) => {
     for (const prop in obj) {
@@ -77,7 +72,10 @@ const Education = ({ index }) => {
 
         {/* ხარისხი & თარიღი */}
         <div className="flex justify-between">
-          <SelectDegrees index={index} />
+          <SelectDegrees
+            index={index}
+            isEmpty={hasAllFalseValues(validations.educations[index])}
+          />
 
           <div className="w-full ml-5">
             <label htmlFor="">დამთავრების რიცხვი</label>

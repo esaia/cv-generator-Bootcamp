@@ -54,7 +54,7 @@ const Cv = () => {
       <p></p>
 
       {/* ჩემს შესახებ */}
-      <div className="flex items-start py-[20px] ">
+      <div className="flex items-start py-[20px]   ">
         <div className=" flex flex-[60%] flex-col gap-5 ">
           <h2 className="text-[#F93B1D] text-[34px] font-bold">
             {inputsData.name + " " + inputsData.surname}
@@ -85,7 +85,7 @@ const Cv = () => {
         </div>
 
         {/* Photo */}
-        <div className=" w-[40%] min-w-[100px]  ">
+        <div className=" w-[40%] min-w-[100px]h-full">
           {photoData && (
             <img
               src={`
@@ -95,7 +95,7 @@ const Cv = () => {
               }
             `}
               alt="profile"
-              className="aspect-square rounded-full object-cover "
+              className="aspect-square rounded-full object-cover w-full"
             />
           )}
         </div>

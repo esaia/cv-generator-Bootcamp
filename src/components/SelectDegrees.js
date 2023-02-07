@@ -1,15 +1,18 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import useFormContext from "../hooks/useFormContext";
 
-const SelectDegrees = ({ index }) => {
-  const { inputsData, setInputsData, validations } = useFormContext();
+const SelectDegrees = ({ index, isEmpty }) => {
+  const { inputsData, setInputsData, validations, thirdButtonClicked } =
+    useFormContext();
 
   const [showSelection, setshowSelection] = useState(false);
   const selectRef = useRef(null);
   const [degrees, setDegrees] = useState([]);
-  const [selectedDegree, setselectedDegree] = useState(
-    inputsData.educations[index].degree || ""
-  );
+  const [selectedDegree, setselectedDegree] = useState({
+    title: inputsData.educations[index].degree,
+    id: inputsData.educations[index].degree_id,
+  });
 
   const handleClickOutside = (e) => {
     if (selectRef.current && !selectRef.current.contains(e.target)) {
@@ -27,29 +30,28 @@ const SelectDegrees = ({ index }) => {
   useEffect(() => {
     inputsData.educations[index] = {
       ...inputsData.educations[index],
-      degree: selectedDegree,
+      degree: selectedDegree.title,
+      degree_id: selectedDegree.id,
     };
 
-    if (selectedDegree && selectedDegree !== "აირჩიეთ ხარისხი") {
+    setInputsData({ ...inputsData });
+    if (selectedDegree.title && selectedDegree.title !== "აირჩიეთ ხარისხი") {
       validations.educations[index] = {
         ...validations.educations[index],
         degree: true,
       };
     }
-
-    setInputsData({ ...inputsData });
   }, [selectedDegree]);
 
   useEffect(() => {
-    const fetchDegrees = async () => {
-      const res = await fetch(
-        "https://resume.redberryinternship.ge/api/degrees"
-      );
-      const data = await res.json();
-      setDegrees(data);
-    };
-
-    fetchDegrees();
+    axios
+      .get("https://resume.redberryinternship.ge/api/degrees")
+      .then(function (response) {
+        setDegrees(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -60,6 +62,10 @@ const SelectDegrees = ({ index }) => {
         className={
           inputsData.educations[index].degree
             ? "allinputs h-full relative flex justify-between px-3 items-center bg-white  cursor-pointer correctInput"
+            : thirdButtonClicked
+            ? isEmpty
+              ? "  allinputs h-full relative flex justify-between px-3 items-center  bg-white cursor-pointer"
+              : "incorrectInput h-full relative flex justify-between px-3 items-center  bg-white cursor-pointer"
             : "allinputs h-full relative flex justify-between px-3 items-center  bg-white cursor-pointer"
         }
         onClick={() => setshowSelection(!showSelection)}
@@ -67,14 +73,16 @@ const SelectDegrees = ({ index }) => {
       >
         <p
           className={`
-                 ${selectedDegree === "" && "text-gray-500 "}
+                 ${selectedDegree.title === "" && "text-gray-500 "}
                `}
         >
-          {selectedDegree === "" ? "აირჩიეთ ხარისხი" : selectedDegree}
+          {selectedDegree.title === ""
+            ? "აირჩიეთ ხარისხი"
+            : selectedDegree.title}
         </p>
         <img src="/img/arrowIcon.svg" alt="arrowIcon" />
         <div
-          className={`absolute top-[45px] left-0 w-full rounded-[4px] bg-white py-2  shadow-lg cursor-pointer z-20 ${
+          className={`absolute top-[45px] left-0 w-full rounded-[4px] bg-white py-2  shadow-lg cursor-pointer z-30 ${
             showSelection ? "block" : "hidden"
           } `}
         >
@@ -84,7 +92,7 @@ const SelectDegrees = ({ index }) => {
                 key={degree.id}
                 className="py-[5px] px-3 hover:text-white hover:bg-gray-400"
                 onClick={() => {
-                  setselectedDegree(degree.title);
+                  setselectedDegree(degree);
                 }}
               >
                 {degree.title}

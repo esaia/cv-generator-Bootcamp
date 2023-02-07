@@ -1,9 +1,12 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import useFormContext from "../../hooks/useFormContext";
 import Cv from "../Cv";
 import ResetIcon from "../ResetIcon";
 
 const FormWrapper = ({ children, title }) => {
+  const api = "https://resume.redberryinternship.ge/api/cvs";
+
   const {
     currentStep,
     setCurrentStep,
@@ -15,8 +18,9 @@ const FormWrapper = ({ children, title }) => {
     setSecondButtonClicked,
     setThirdButtonClicked,
   } = useFormContext();
-
   const { name, surname, email, phone_number } = validations;
+
+  const isEmpty = (obj) => Object.values(obj).every((val) => val === "");
 
   const next = () => {
     const hasAllTrueValues = (obj) => {
@@ -27,8 +31,11 @@ const FormWrapper = ({ children, title }) => {
     };
 
     const hasAllFalseValues = (obj) => {
-      for (const prop in obj) {
-        if (obj[prop]) return false;
+      let newObj = {};
+      newObj = { ...obj };
+      delete newObj.degree_id;
+      for (const prop in newObj) {
+        if (newObj[prop]) return false;
       }
       return true;
     };
@@ -83,15 +90,69 @@ const FormWrapper = ({ children, title }) => {
           }
         }
 
-        if (hasArrayAllTrueValues(validationCheckerthirdPage)) {
-          console.log("yes");
+        // 22222
 
-          console.log(inputsData);
+        if (hasArrayAllTrueValues(validationCheckerthirdPage)) {
+          // copy new sepirate object
+          let finalData = {
+            ...inputsData,
+            phone_number: inputsData.phone_number.replaceAll(" ", ""),
+            experiences: [...inputsData.experiences],
+            educations: [...inputsData.educations],
+            email: inputsData.email,
+          };
+
+          // remove empty objects
+          for (let i = 0; i < inputsData.experiences.length; i++) {
+            if (isEmpty(inputsData.experiences[i])) {
+              finalData.experiences.splice(i, 1);
+            }
+          }
+          for (let i = 0; i < inputsData.educations.length; i++) {
+            if (isEmpty(inputsData.educations[i])) {
+              finalData.educations.splice(i, 1);
+            }
+          }
+
+          finalData.educations = finalData.educations.filter(
+            (item) => item.degree_id !== -1
+          );
+
+          const formData = new FormData();
+          for (let key in finalData) {
+            if (key === "image") {
+              formData.append("image", finalData[key], finalData[key].name);
+            } else {
+              formData.append(key, JSON.stringify(finalData[key]));
+            }
+          }
+
+          console.log(finalData);
+
+          // send post request to baseURL
+
+          axios
+            .post(api, finalData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              if (response.status === 201 || response.status === 200) {
+                setCurrentStep((prev) => prev + 1);
+
+                console.log(response);
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+
           // setCurrentStep((prev) => prev + 1);
         } else {
           setThirdButtonClicked(true);
-          console.log("no");
-          // setCurrentStep((prev) => prev);
+          console.log("please fill form");
+          setCurrentStep((prev) => prev);
         }
         break;
 
@@ -121,7 +182,7 @@ const FormWrapper = ({ children, title }) => {
             <ResetIcon />
 
             {/* component */}
-            <div className="mycomponent">{children}</div>
+            <div>{children}</div>
           </div>
 
           {/* buttons */}
@@ -145,7 +206,7 @@ const FormWrapper = ({ children, title }) => {
         </div>
       </div>
 
-      <div className="relative w-[40%] bg-white min-h-[100vh] h-full py-5 px-20">
+      <div className="relative w-[40%] bg-white min-h-[100vh] h-fit py-5 px-20 ">
         <Cv />
       </div>
     </div>
