@@ -187,7 +187,7 @@ const FormWrapper = ({ children, title }) => {
           {/* buttons */}
           <div className="buttons w-full flex flex-row-reverse justify-between my-[40px]">
             <button
-              className="px-[35px] py-[14px] bg-[#6B40E3] text-white rounded-[4px]"
+              className="px-[35px] py-[14px] bg-[#6B40E3] text-white rounded-[4px]  hover:bg-[#7949FF] active:bg-[#512FAF]"
               onClick={next}
             >
               {currentStep === allStep - 2 ? "დასრულება" : "შემდეგი"}
@@ -195,7 +195,7 @@ const FormWrapper = ({ children, title }) => {
 
             {currentStep > 1 && (
               <button
-                className="px-[35px] py-[14px] bg-[#6B40E3] text-white rounded-[4px]"
+                className="px-[35px] py-[14px] bg-[#6B40E3] text-white rounded-[4px] hover:bg-[#7949FF] active:bg-[#512FAF]"
                 onClick={back}
               >
                 უკან
