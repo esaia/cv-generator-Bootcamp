@@ -11,7 +11,7 @@ module.exports = {
     },
 
     backgroundImage: {
-      homeBackground: "url('/public/img/background.png')",
+      homeBackground: "url('/public/img/background.jpg')",
     },
   },
   plugins: [require("@tailwindcss/forms")],
