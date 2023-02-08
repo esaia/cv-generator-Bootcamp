@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useFormContext from "../../hooks/useFormContext";
 import Cv from "../Cv";
 import ResetIcon from "../ResetIcon";
@@ -90,8 +90,6 @@ const FormWrapper = ({ children, title }) => {
           }
         }
 
-        // 22222
-
         if (hasArrayAllTrueValues(validationCheckerthirdPage)) {
           // copy new sepirate object
           let finalData = {
@@ -105,7 +103,9 @@ const FormWrapper = ({ children, title }) => {
           // remove empty objects
           for (let i = 0; i < inputsData.experiences.length; i++) {
             if (isEmpty(inputsData.experiences[i])) {
-              finalData.experiences.splice(i, 1);
+              finalData.experiences = finalData.experiences.filter(
+                (item) => item.position !== ""
+              );
             }
           }
           for (let i = 0; i < inputsData.educations.length; i++) {
@@ -129,7 +129,7 @@ const FormWrapper = ({ children, title }) => {
 
           console.log(finalData);
 
-          // send post request to baseURL
+          // send post request to api
 
           axios
             .post(api, finalData, {
@@ -140,7 +140,6 @@ const FormWrapper = ({ children, title }) => {
             .then((response) => {
               if (response.status === 201 || response.status === 200) {
                 setCurrentStep((prev) => prev + 1);
-
                 console.log(response);
               }
             })
@@ -166,8 +165,8 @@ const FormWrapper = ({ children, title }) => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-[60%] min-h-[100vh] flex justify-center ">
+    <div className="flex flex-col md:flex-row ">
+      <div className=" md:w-[60%] min-h-[100vh] flex justify-center ">
         <div className="w-full h-full flex flex-col justify-between items-cente  max-w-[820px] px-[20px]  ">
           <div>
             {/* header */}
@@ -206,7 +205,7 @@ const FormWrapper = ({ children, title }) => {
         </div>
       </div>
 
-      <div className="relative w-[40%] bg-white min-h-[100vh] h-fit py-5 px-20 ">
+      <div className="relative md:w-[40%] bg-white min-h-[100vh] h-fit py-5 px-20 ">
         <Cv />
       </div>
     </div>

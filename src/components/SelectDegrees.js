@@ -63,7 +63,7 @@ const SelectDegrees = ({ index, isEmpty }) => {
           inputsData.educations[index].degree
             ? "allinputs h-full relative flex justify-between px-3 items-center bg-white  cursor-pointer correctInput"
             : thirdButtonClicked
-            ? isEmpty
+            ? isEmpty && index !== 0
               ? "  allinputs h-full relative flex justify-between px-3 items-center  bg-white cursor-pointer"
               : "incorrectInput h-full relative flex justify-between px-3 items-center  bg-white cursor-pointer"
             : "allinputs h-full relative flex justify-between px-3 items-center  bg-white cursor-pointer"
@@ -90,7 +90,7 @@ const SelectDegrees = ({ index, isEmpty }) => {
             return (
               <p
                 key={degree.id}
-                className="py-[5px] px-3 hover:text-white hover:bg-gray-400"
+                className="py-[5px] px-3 hover:text-[#1A1A1A] hover:bg-[#C3DCEE]"
                 onClick={() => {
                   setselectedDegree(degree);
                 }}
